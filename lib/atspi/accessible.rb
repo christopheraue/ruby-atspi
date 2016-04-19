@@ -13,7 +13,7 @@ module ATSPI
     delegate %i(toolkit_name toolkit_version) => :@native
 
     def parent
-      if %i(desktop_frame application).include? role
+      if %i(desktop_frame).include? role
         nil
       else
         Accessible.new(@native.get_parent)
@@ -21,10 +21,10 @@ module ATSPI
     end
 
     def index_in_parent
-      if role == :application
-        nil
-      else
-        @native.index_in_parent
+      case role
+      when :desktop_frame then "desktop#{@native.index_in_parent}"
+      when :application then name
+      else @native.index_in_parent
       end
     end
 
@@ -60,11 +60,13 @@ module ATSPI
     end
 
     def application
-      Accessible.new(@native.application)
+      if application = @native.application
+        Accessible.new(application)
+      end
     end
 
     def inspect
-      "#<#{self.class.name}:0x#{'%x14' % __id__} @path=#{application.name}/#{path.join('/')} @name=#{name.inspect} @role=#{role.inspect}>"
+      "#<#{self.class.name}:0x#{'%x14' % __id__} @path=#{path.join('/')} @name=#{name.inspect} @role=#{role.inspect}>"
     end
   end
 end
