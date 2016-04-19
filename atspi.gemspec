@@ -5,7 +5,7 @@ require 'atspi/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "atspi"
-  spec.version       = Atspi::VERSION
+  spec.version       = ATSPI::VERSION
   spec.authors       = ["Christopher Aue"]
   spec.email         = ["mail@christopheraue.net"]
 
@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "gir_ffi", "~> 0.10.0"
   spec.add_development_dependency "bundler", "~> 1.8"
   spec.add_development_dependency "rake", "~> 10.0"
 end
