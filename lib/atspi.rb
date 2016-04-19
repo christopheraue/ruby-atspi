@@ -15,7 +15,7 @@ module ATSPI
   class << self
     def desktops
       @desktops ||= Libatspi.get_desktop_count.times.map do |idx|
-        Accessible.new(Libatspi.get_desktop(idx), parent: nil, index: idx)
+        Accessible.new(Libatspi.get_desktop(idx))
       end
     end
   end

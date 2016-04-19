@@ -4,10 +4,8 @@ module ATSPI
   class Accessible
     extend Forwardable
 
-    def initialize(native, opts = {})
+    def initialize(native)
       @native = native
-      @parent = opts[:parent] if opts.has_key? :parent
-      @index_in_parent = opts[:index] if opts.has_key? :index
     end
 
     delegate %i(name description) => :@native
@@ -15,28 +13,29 @@ module ATSPI
     delegate %i(toolkit_name toolkit_version) => :@native
 
     def parent
-      if instance_variable_defined? :@parent # so we can set parent to nil on initialization
-        @parent
+      if %i(desktop_frame application).include? role
+        nil
       else
-        @parent = Accessible.new(@native.parent)
+        Accessible.new(@native.get_parent)
       end
     end
 
     def index_in_parent
-      @index_in_parent ||= @native.index_in_parent
+      if role == :application
+        nil
+      else
+        @native.index_in_parent
+      end
     end
 
     def path
-      @path ||= if parent
-        parent.path + [index_in_parent]
-      else
-        [index_in_parent]
-      end
+      path = parent ? parent.path : []
+      path + [*index_in_parent]
     end
 
     def children
       @native.child_count.times.map do |idx|
-        Accessible.new(@native.child_at_index(idx), parent: self, index: idx)
+        Accessible.new(@native.child_at_index(idx))
       end
     end
 
@@ -60,8 +59,12 @@ module ATSPI
       @native.interfaces.to_a
     end
 
+    def application
+      Accessible.new(@native.application)
+    end
+
     def inspect
-      "#<#{self.class.name}:0x#{'%x14' % __id__} @path=#{path.join('/')} @name=#{name.inspect} @role=#{role.inspect}>"
+      "#<#{self.class.name}:0x#{'%x14' % __id__} @path=#{application.name}/#{path.join('/')} @name=#{name.inspect} @role=#{role.inspect}>"
     end
   end
 end
