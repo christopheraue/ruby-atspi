@@ -1,3 +1,4 @@
+require 'forwardable'
 require 'gir_ffi'
 
 # I would like to name the Atspi module as Libatspi but there seems to be no
