@@ -73,6 +73,14 @@ module ATSPI
       end
     end
 
+    def component
+      if @native.component_iface
+        Component.new(@native)
+      else
+        nil
+      end
+    end
+
     def inspect
       "#<#{self.class.name}:0x#{'%x14' % __id__} @path=#{path.join('/')} @name=#{name.inspect} @role=#{role.inspect}>"
     end
