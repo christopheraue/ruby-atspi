@@ -48,7 +48,7 @@ module ATSPI
     end
 
     def states
-      @native.state_set.states.to_a
+      StateSet.new(@native.state_set)
     end
 
     def attributes
