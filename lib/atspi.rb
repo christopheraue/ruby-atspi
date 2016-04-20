@@ -10,13 +10,12 @@ GirFFI.setup :Atspi
 Libatspi = Atspi
 
 require 'atspi/state_set'
+require 'atspi/extents'
 require 'atspi/accessible'
 require 'atspi/accessible/action'
 require 'atspi/accessible/descendants'
 require 'atspi/accessible/descendants/filter'
 require 'atspi/accessible/component'
-require 'atspi/accessible/component/point'
-require 'atspi/accessible/component/rect'
 require 'atspi/accessible/document'
 
 module ATSPI
