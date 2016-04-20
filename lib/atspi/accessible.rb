@@ -8,6 +8,9 @@ module ATSPI
       @native = native
     end
 
+    attr_reader :native
+    private :native
+
     delegate %i(name description) => :@native
     delegate %i(role role_name localized_role_name) => :@native
     delegate %i(toolkit_name toolkit_version) => :@native
@@ -72,6 +75,15 @@ module ATSPI
         []
       end
     end
+
+    def descendants
+      if @native.collection_iface
+        Descendants.new(@native)
+      else
+        nil
+      end
+    end
+    alias_method :collection, :descendants
 
     def component
       if @native.component_iface
