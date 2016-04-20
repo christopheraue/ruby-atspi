@@ -17,6 +17,12 @@ require 'atspi/accessible/descendants'
 require 'atspi/accessible/descendants/filter'
 require 'atspi/accessible/component'
 require 'atspi/accessible/document'
+require 'atspi/accessible/text'
+require 'atspi/accessible/text/character'
+require 'atspi/accessible/text/offset'
+require 'atspi/accessible/text/caret'
+require 'atspi/accessible/text/range'
+require 'atspi/accessible/text/selection'
 
 module ATSPI
   class << self
