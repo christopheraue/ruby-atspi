@@ -65,6 +65,14 @@ module ATSPI
       end
     end
 
+    def actions
+      if @native.action_iface
+        @native.n_actions.times.map{ |idx| Action.new(@native, idx) }
+      else
+        []
+      end
+    end
+
     def inspect
       "#<#{self.class.name}:0x#{'%x14' % __id__} @path=#{path.join('/')} @name=#{name.inspect} @role=#{role.inspect}>"
     end

@@ -10,6 +10,7 @@ GirFFI.setup :Atspi
 Libatspi = Atspi
 
 require 'atspi/accessible'
+require 'atspi/accessible/action'
 require 'atspi/state_set'
 
 module ATSPI
