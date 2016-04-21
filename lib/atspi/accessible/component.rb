@@ -13,16 +13,16 @@ module ATSPI
 
     alias_method :contains?, :contains
 
-    def accessible_at_point(x, y, type)
-      Accessible.new(@native.accessible_at_point(x, y, type))
+    def accessible_at_point(x, y, relative_to:)
+      Accessible.new(@native.accessible_at_point(x, y, relative_to))
     end
 
-    def extents(relative_to)
+    def extents(relative_to:)
       Extents.new(@native.extents(relative_to))
     end
 
     def inspect
-      "#<#{self.class.name}:0x#{'%x14' % __id__} @extents=#{extents(:screen).inspect}>"
+      "#<#{self.class.name}:0x#{'%x14' % __id__} @extents=#{extents(relative_to: :screen).inspect}>"
     end
   end
 end

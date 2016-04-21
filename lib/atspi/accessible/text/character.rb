@@ -16,13 +16,13 @@ module ATSPI
         1
       end
 
-      def extents(relative_to)
+      def extents(relative_to:)
         Extents.new(@text_native.character_extents(@offset, relative_to))
       end
 
       def inspect
         "#<#{self.class.name}:0x#{'%x14' % __id__} @content=#{content.inspect} @length=#{length} " <<
-          "@offset=#{@offset} @extents=#{extents(:screen).inspect}>"
+          "@offset=#{@offset} @extents=#{extents(relative_to: :screen).inspect}>"
       end
     end
   end

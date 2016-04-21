@@ -19,11 +19,11 @@ class ATSPI::Accessible
       Caret.new(@native)
     end
 
-    def offset_at_point(x, y, relative_to)
+    def offset_at_point(x, y, relative_to:)
       Offset.new(@native, @native.offset_at_point(x, y, relative_to))
     end
 
-    def bounded_ranges(x, y, width, height, relative_to, clip_x, clip_y)
+    def bounded_ranges(x, y, width, height, relative_to:, clip_x:, clip_y:)
       @native.bounded_ranges(x, y, width, height, relative_to, clip_x, clip_y).map do |range|
         Range.new(@native, range)
       end
