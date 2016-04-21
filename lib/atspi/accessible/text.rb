@@ -1,11 +1,11 @@
 class ATSPI::Accessible
   class Text
     extend Forwardable
+    include Editable
+    include Hypertext
 
     def initialize(native)
       @native = native
-      extend Editable
-      extend Hypertext
     end
 
     delegate %i(character_count) => :@native
