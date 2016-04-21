@@ -16,10 +16,10 @@ module ATSPI
     delegate %i(toolkit_name toolkit_version) => :@native
 
     def parent
-      if %i(desktop_frame).include? role
-        nil
-      else
-        Accessible.new(@native.get_parent)
+      case role
+      when :desktop_frame then nil
+      when :frame then application # open office frames have a nil parent
+      else Accessible.new(@native.get_parent)
       end
     end
 
@@ -65,6 +65,8 @@ module ATSPI
     def application
       if application = @native.application
         Accessible.new(application)
+      else
+        nil
       end
     end
 
