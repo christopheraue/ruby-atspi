@@ -5,6 +5,7 @@ class ATSPI::Accessible
     def initialize(native)
       @native = native
       extend Editable
+      extend Hypertext
     end
 
     delegate %i(character_count) => :@native
@@ -39,15 +40,6 @@ class ATSPI::Accessible
     end
     delegate %i(add_selection) => :@native
     alias_method :select, :add_selection
-
-    def hyperlinks
-      if @native.hypertext_iface
-        @native.n_links.times.map{ |idx| Hyperlink.new(@native, @native.link(idx)) }
-      else
-        []
-      end
-    end
-    alias_method :links, :hyperlinks
 
     def inspect
       text_s = text[0..20] << (length > 20 ? '…' : '')

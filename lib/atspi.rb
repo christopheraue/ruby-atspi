@@ -25,8 +25,9 @@ require 'atspi/accessible/text/offset'
 require 'atspi/accessible/text/caret'
 require 'atspi/accessible/text/range'
 require 'atspi/accessible/text/selection'
-require 'atspi/accessible/text/editable'
 require 'atspi/accessible/text/hyperlink'
+require 'atspi/accessible/text/editable'
+require 'atspi/accessible/text/hypertext'
 
 module ATSPI
   class << self
