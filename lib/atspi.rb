@@ -37,6 +37,10 @@ module ATSPI
         Accessible.new(Libatspi.get_desktop(idx))
       end
     end
+
+    def applications(desktop = desktops.first)
+      desktop.children
+    end
   end
 
   class Error < StandardError; end
