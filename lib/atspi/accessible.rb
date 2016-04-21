@@ -120,6 +120,14 @@ module ATSPI
     end
     alias_method :link, :hyperlink
 
+    def image
+      if @native.image_iface
+        Image.new(@native)
+      else
+        nil
+      end
+    end
+
     def inspect
       "#<#{self.class.name}:0x#{'%x14' % __id__} @path=#{path.join('/')} @name=#{name.inspect} @role=#{role.inspect}>"
     end

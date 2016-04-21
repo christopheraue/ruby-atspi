@@ -28,6 +28,7 @@ require 'atspi/accessible/text/selection'
 require 'atspi/accessible/text/hyperlink'
 require 'atspi/accessible/text/editable'
 require 'atspi/accessible/text/hypertext'
+require 'atspi/accessible/image'
 
 module ATSPI
   class << self
