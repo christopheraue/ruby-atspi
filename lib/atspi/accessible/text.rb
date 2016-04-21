@@ -4,7 +4,7 @@ class ATSPI::Accessible
 
     def initialize(native)
       @native = native
-      extend Editable if editable?
+      extend Editable
     end
 
     delegate %i(character_count) => :@native
@@ -39,10 +39,6 @@ class ATSPI::Accessible
     end
     delegate %i(add_selection) => :@native
     alias_method :select, :add_selection
-
-    def editable?
-      not @native.editable_text_iface.nil?
-    end
 
     def hyperlinks
       if @native.hypertext_iface
