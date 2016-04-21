@@ -1,17 +1,38 @@
 module ATSPI
-  class Accessible::Children < Array
-    def initialize(native, children)
+  class Accessible::Children
+    include Enumerable
+
+    def initialize(native)
       @native = native
-      super(children)
     end
+
+    def each
+      count.times.each do |idx|
+        yield at(idx)
+      end
+    end
+
+    def at(idx)
+      Accessible.new(@native.child_at_index(idx))
+    end
+    alias_method :[], :at
+
+    def count
+      @native.child_count
+    end
+    alias_method :size, :count
+    alias_method :length, :count
 
     def selectable?
       not @native.selection_iface.nil?
     end
 
     def selected
-      selected_children_count = selectable? ? @native.n_selected_children : 0
-      selected_children_count.times.map{ |idx| Accessible.new(@native.selected_child(idx)) }
+      if selectable?
+        Selected.new(@native)
+      else
+        []
+      end
     end
 
     def select_all
@@ -24,7 +45,7 @@ module ATSPI
 
     def inspect
       "#<#{self.class.name}:0x#{'%x14' % __id__} @count=#{count} @selectable?=#{selectable?} " <<
-        "@selected=#{selected.map(&:index_in_parent).inspect}>"
+        "@selected=#{selected.inspect}>"
     end
   end
 end

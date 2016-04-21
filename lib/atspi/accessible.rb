@@ -38,10 +38,7 @@ module ATSPI
     end
 
     def children
-      children = @native.child_count.times.map do |idx|
-        Accessible.new(@native.child_at_index(idx))
-      end
-      Children.new(@native, children)
+      Children.new(@native)
     end
 
     def relations
