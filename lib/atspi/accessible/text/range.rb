@@ -18,7 +18,7 @@ module ATSPI
         if @range_native.respond_to? :content
           @range_native.content
         else
-          @text_native.text(start_offset, end_offset)
+          @text_native.text(from: start_offset, to: end_offset)
         end
       end
       alias_method :value, :content
