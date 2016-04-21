@@ -44,9 +44,18 @@ class ATSPI::Accessible
       not @native.editable_text_iface.nil?
     end
 
+    def hyperlinks
+      if @native.hypertext_iface
+        @native.n_links.times.map{ |idx| Hyperlink.new(@native, @native.link(idx)) }
+      else
+        []
+      end
+    end
+    alias_method :links, :hyperlinks
+
     def inspect
       text_s = text[0..20] << (length > 20 ? '…' : '')
-      "#<#{self.class.name}:0x#{'%x14' % __id__} @value=#{text_s} @length=#{length}>"
+      "#<#{self.class.name}:0x#{'%x14' % __id__} @value=#{text_s.inspect} @length=#{length}>"
     end
   end
 end

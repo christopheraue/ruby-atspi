@@ -111,6 +111,15 @@ module ATSPI
       end
     end
 
+    def hyperlink
+      if hyperlink = @native.hyperlink
+        Hyperlink.new(hyperlink)
+      else
+        nil
+      end
+    end
+    alias_method :link, :hyperlink
+
     def inspect
       "#<#{self.class.name}:0x#{'%x14' % __id__} @path=#{path.join('/')} @name=#{name.inspect} @role=#{role.inspect}>"
     end
