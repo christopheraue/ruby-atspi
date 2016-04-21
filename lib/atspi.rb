@@ -23,6 +23,7 @@ require 'atspi/accessible/text/offset'
 require 'atspi/accessible/text/caret'
 require 'atspi/accessible/text/range'
 require 'atspi/accessible/text/selection'
+require 'atspi/accessible/text/editable'
 
 module ATSPI
   class << self

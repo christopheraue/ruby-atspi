@@ -4,12 +4,13 @@ class ATSPI::Accessible
 
     def initialize(native)
       @native = native
+      extend Editable if editable?
     end
 
     delegate %i(character_count) => :@native
     alias_method :length, :character_count
 
-    def text(from = 0, to = length)
+    def text(from: 0, to: length)
       @native.text(from, to)
     end
     alias_method :value, :text
@@ -38,6 +39,10 @@ class ATSPI::Accessible
     end
     delegate %i(add_selection) => :@native
     alias_method :select, :add_selection
+
+    def editable?
+      not @native.editable_text_iface.nil?
+    end
 
     def inspect
       text_s = text[0..20] << (length > 20 ? '…' : '')
