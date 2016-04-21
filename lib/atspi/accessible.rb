@@ -3,6 +3,7 @@ Libatspi.load_class :Accessible
 module ATSPI
   class Accessible
     extend Forwardable
+    include Selectable
 
     def initialize(native)
       @native = native
@@ -37,9 +38,10 @@ module ATSPI
     end
 
     def children
-      @native.child_count.times.map do |idx|
+      children = @native.child_count.times.map do |idx|
         Accessible.new(@native.child_at_index(idx))
       end
+      Children.new(@native, children)
     end
 
     def relations
