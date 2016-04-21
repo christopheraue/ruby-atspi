@@ -31,6 +31,7 @@ require 'atspi/accessible/text/range'
 require 'atspi/accessible/text/selection'
 require 'atspi/accessible/text/hyperlink'
 require 'atspi/accessible/image'
+require 'atspi/accessible/value'
 
 module ATSPI
   class << self
