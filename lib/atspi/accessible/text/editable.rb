@@ -4,12 +4,13 @@ class ATSPI::Accessible::Text
       not @native.editable_text_iface.nil?
     end
 
-    def text=(text)
+    def set_to(text)
       delete
       insert(text)
     end
-    alias_method :value=, :text=
-    alias_method :content=, :text=
+    alias_method :text=, :set_to
+    alias_method :value=, :set_to
+    alias_method :content=, :set_to
 
     def insert(text, at: caret.offset)
       editable? and @native.insert_text(at, text, text.length)
