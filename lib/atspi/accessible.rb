@@ -135,6 +135,14 @@ module ATSPI
       end
     end
 
+    def table
+      if @native.table_iface
+        Table.new(@native)
+      else
+        nil
+      end
+    end
+
     def inspect
       "#<#{self.class.name}:0x#{'%x14' % __id__} @path=#{path.join('/')} @name=#{name.inspect} @role=#{role.inspect}>"
     end
