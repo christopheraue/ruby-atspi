@@ -5,6 +5,25 @@ module ATSPI
     extend Forwardable
     include Selectable
 
+    class << self
+      def new(native)
+        if self == Accessible
+          new_mapped(native) or super
+        else
+          super
+        end
+      end
+
+      def new_mapped(native)
+        case native.role
+        when :desktop_frame then Desktop.new(native)
+        when :application then Application.new(native)
+        when :frame then Window.new(native)
+        else nil
+        end
+      end
+    end
+
     def initialize(native)
       @native = native
     end
@@ -17,24 +36,14 @@ module ATSPI
     delegate %i(toolkit_name toolkit_version) => :@native
 
     def parent
-      case role
-      when :desktop_frame then nil
-      when :frame then application # open office frames have a nil parent
-      else Accessible.new(@native.get_parent)
-      end
+      Accessible.new(@native.get_parent)
     end
 
-    def index_in_parent
-      case role
-      when :desktop_frame then "desktop#{@native.index_in_parent}"
-      when :application then name
-      else @native.index_in_parent
-      end
-    end
+    delegate :index_in_parent => :@native
+    alias_method :index, :index_in_parent
 
     def path
-      path = parent ? parent.path : []
-      path + [*index_in_parent]
+      parent.path + [*index_in_parent]
     end
 
     def children
@@ -62,12 +71,11 @@ module ATSPI
     end
 
     def application
-      if application = @native.application
-        Accessible.new(application)
-      else
-        nil
-      end
+      Application.new(@native.application)
     end
+
+    delegate :window => :parent
+    delegate :desktop => :application
 
     def actions
       if @native.action_iface
@@ -144,7 +152,9 @@ module ATSPI
     end
 
     def inspect
-      "#<#{self.class.name}:0x#{'%x14' % __id__} @path=#{path.join('/')} @name=#{name.inspect} @role=#{role.inspect}>"
+      "#<#{self.class.name}:0x#{'%x14' % __id__} @desktop=#{desktop.index} " <<
+        "@application=#{application.name} @window=#{window.name} @path=#{path.join('/')} " <<
+        "@name=#{name.inspect} @role=#{role.inspect}>"
     end
   end
 end

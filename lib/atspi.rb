@@ -47,17 +47,20 @@ require 'atspi/accessible/table/cell/rows'
 require 'atspi/accessible/table/cell/columns'
 require 'atspi/accessible/image'
 require 'atspi/accessible/value'
+require 'atspi/desktop'
+require 'atspi/application'
+require 'atspi/window'
 
 module ATSPI
   class << self
     def desktops
       @desktops ||= Libatspi.get_desktop_count.times.map do |idx|
-        Accessible.new(Libatspi.get_desktop(idx))
+        Desktop.new(Libatspi.get_desktop(idx))
       end
     end
 
     def applications(desktop = desktops.first)
-      desktop.children
+      desktop.applications
     end
   end
 
