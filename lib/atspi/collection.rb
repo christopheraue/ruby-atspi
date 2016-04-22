@@ -11,13 +11,16 @@ module ATSPI
     def at(idx)
       nil
     end
-    alias_method :[], :at
+
+    def [](*args)
+      at(*args)
+    end
 
     def count
       0
     end
-    alias_method :size, :count
-    alias_method :length, :count
+    def size; count end
+    def length; count end
 
     def inspect
       "#<#{self.class.name}:0x#{'%x14' % __id__} @count=#{count}>"
