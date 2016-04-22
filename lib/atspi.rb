@@ -11,6 +11,9 @@ Libatspi = Atspi
 
 require 'atspi/state_set'
 require 'atspi/extents'
+require 'atspi/collection'
+require 'atspi/selectable_collection'
+require 'atspi/selectable_collection/selected'
 require 'atspi/accessible/selectable'
 require 'atspi/accessible'
 require 'atspi/accessible/action'
