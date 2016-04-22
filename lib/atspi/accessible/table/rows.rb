@@ -7,8 +7,10 @@ module ATSPI
         @native = native
       end
 
-      def at(idx)
-        Row.new(@native, idx)
+      def at(*)
+        super do |idx|
+          Row.new(@native, idx)
+        end
       end
 
       def count

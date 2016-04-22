@@ -6,8 +6,10 @@ module ATSPI
       @native = native
     end
 
-    def at(idx)
-      Accessible.new(@native.selected_child(idx))
+    def at(*)
+      super do |idx|
+        Accessible.new(@native.selected_child(idx))
+      end
     end
 
     def count

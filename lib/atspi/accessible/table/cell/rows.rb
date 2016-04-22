@@ -10,8 +10,10 @@ module ATSPI
         @first_idx = row_col_span[1]
       end
 
-      def at(idx)
-        Row.new(@native.get_parent, @first_idx+idx)
+      def at(*)
+        super do |idx|
+          Row.new(@native.get_parent, @first_idx+idx)
+        end
       end
 
       def count

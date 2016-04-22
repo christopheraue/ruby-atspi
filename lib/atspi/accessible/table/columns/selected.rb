@@ -15,8 +15,10 @@ module ATSPI
         end
       end
 
-      def at(idx)
-        Column.new(@native, idx)
+      def at(*)
+        super do |idx|
+          Column.new(@native, idx)
+        end
       end
 
       def count
