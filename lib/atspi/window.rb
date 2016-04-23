@@ -12,7 +12,8 @@ module ATSPI
 
     def inspect
       "#<#{self.class.name}:0x#{'%x14' % __id__} @desktop=#{desktop.index} " <<
-        "@application=#{application.name} @name=#{name.inspect}>"
+        "@application=#{application.name} @name=#{name.inspect} " <<
+        "@extents=#{extents(relative_to: :screen).inspect}>"
     end
   end
 end

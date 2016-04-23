@@ -4,11 +4,12 @@ module ATSPI
   class Accessible
     extend Forwardable
     include Selectable
+    include Component
 
     class << self
       def new(native)
         if self == Accessible
-          new_mapped(native) or super
+          native and (new_mapped(native) or super)
         else
           super
         end
@@ -94,14 +95,6 @@ module ATSPI
     end
     alias_method :collection, :descendants
 
-    def component
-      if @native.component_iface
-        Component.new(@native)
-      else
-        nil
-      end
-    end
-
     def document
       if @native.document_iface
         Document.new(@native)
@@ -154,7 +147,7 @@ module ATSPI
     def inspect
       "#<#{self.class.name}:0x#{'%x14' % __id__} @desktop=#{desktop.index} " <<
         "@application=#{application.name} @window=#{window.name} @path=#{path.join('/')} " <<
-        "@name=#{name.inspect} @role=#{role.inspect}>"
+        "@name=#{name.inspect} @role=#{role.inspect} @extents=#{extents(relative_to: :screen).inspect}>"
     end
   end
 end
