@@ -17,3 +17,20 @@ And then execute:
 Or install it yourself as:
 
     $ gem install atspi
+
+## Getting Started
+
+```ruby
+desktop = ATSPI.desktops.first
+application = ATSPI.applications(desktop).last
+windows = application.windows
+```
+
+## Documentation
+
+
+
+## Todo
+
+* Event listeners
+* (Editable) text attributes

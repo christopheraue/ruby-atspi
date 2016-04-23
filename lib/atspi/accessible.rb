@@ -11,6 +11,7 @@ module ATSPI
     include Component
 
     class << self
+    # @!group Lifecycle
       # Returns a new instance wrapping a native object coming from FFI. Does
       # so by mapping desktop, application and window accessibles to their
       # specific subclasses.
@@ -41,15 +42,47 @@ module ATSPI
         else nil
         end
       end
+    # @!endgroup
     end
 
+  # @!group Lifecycle
     def initialize(native)
       @native = native
     end
+  # @!endgroup
 
     attr_reader :native
     private :native
 
+  # @!group Identification
+    # @return [Desktop] its desktop, that is the {#parent} of its {#application}.
+    delegate :desktop => :application
+
+    # @return [Application] its application
+    #
+    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-application atspi_accessible_get_application
+    def application
+      Application.new(@native.application)
+    end
+
+    # @return [Window] its top level window. It is a {#children child} of its {#application} and has
+    #   the {#role} :frame.
+    delegate :window => :parent
+
+    # @return [Integer] the index in the collection of its {#parent} {#children}
+    #
+    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-index-in-parent atspi_accessible_get_index_in_parent
+    delegate :index_in_parent => :@native
+    alias_method :index, :index_in_parent
+
+    # @return [Array<Integer>] the list of {#index_in_parent} of all its
+    #   ancestors until reaching its {#window}, inclusive.
+    def path
+      parent.path + [*index_in_parent]
+    end
+  # @!endgroup
+
+  # @!group Attributes & States
     # @return [String] its name
     #
     # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-name atspi_accessible_get_name
@@ -86,44 +119,6 @@ module ATSPI
     # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-toolkit-version atspi_accessible_get_toolkit_version
     delegate :toolkit_version => :@native
 
-    # @return [Accessible] its parent
-    #
-    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-parent atspi_accessible_get_parent
-    def parent
-      Accessible.new(@native.get_parent)
-    end
-
-    # @return [Integer] the index in the collection of its {#parent} {#children}
-    #
-    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-index-in-parent atspi_accessible_get_index_in_parent
-    delegate :index_in_parent => :@native
-    alias_method :index, :index_in_parent
-
-    # @return [Array<Integer>] the list of {#index_in_parent} of all its
-    #   ancestors until reaching its {#window}, inclusive.
-    def path
-      parent.path + [*index_in_parent]
-    end
-
-    # @return [Children] its children
-    #
-    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-child-count atspi_accessible_get_child_count
-    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-child-at-index atspi_accessible_get_child_at_index
-    def children
-      Children.new(@native)
-    end
-
-    # @return [Hash<Symbol => Array<Accessible>>] its relations as hash with relation type as key and relation targets as value.
-    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-relation-set atspi_accessible_get_relation_set
-    # @see https://developer.gnome.org/libatspi/stable/AtspiRelation.html atspi-relation
-    def relations
-      @native.relation_set.to_a.inject({}) do |relations, relation|
-        type = relation.relation_type
-        targets = relation.n_targets.times.map{ |idx| Accessible.new(relation.target(idx)) }
-        relations.merge!(type => targets)
-      end
-    end
-
     # @return [StateSet] its states
     #
     # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-state-set atspi_accessible_get_state_set
@@ -144,31 +139,22 @@ module ATSPI
     def interfaces
       @native.interfaces.to_a
     end
+  # @!endgroup
 
-    # @return [Application] its application
+  # @!group Tree & Traversal
+    # @return [Accessible] its parent
     #
-    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-application atspi_accessible_get_application
-    def application
-      Application.new(@native.application)
+    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-parent atspi_accessible_get_parent
+    def parent
+      Accessible.new(@native.get_parent)
     end
 
-    # @return [Window] its top level window. It is a {#children child} of its {#application} and has
-    #   the {#role} :frame.
-    delegate :window => :parent
-
-    # @return [Desktop] its desktop, that is the {#parent} of its {#application}.
-    delegate :desktop => :application
-
-    # @return [Array<Action>] the actions it supports. The array will be empty
-    #   if it does not implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-action action interface}
+    # @return [Children] its children
     #
-    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-action atspi_accessible_get_action
-    def actions
-      if @native.action_iface
-        @native.n_actions.times.map{ |idx| Action.new(@native, idx) }
-      else
-        []
-      end
+    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-child-count atspi_accessible_get_child_count
+    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-child-at-index atspi_accessible_get_child_at_index
+    def children
+      Children.new(@native)
     end
 
     # @return [Descendants, []] its descendants. It will be an empty array it
@@ -183,6 +169,33 @@ module ATSPI
       end
     end
 
+    # @return [Hash<Symbol => Array<Accessible>>] its relations as hash with relation type as key and relation targets as value.
+    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-relation-set atspi_accessible_get_relation_set
+    # @see https://developer.gnome.org/libatspi/stable/AtspiRelation.html atspi-relation
+    def relations
+      @native.relation_set.to_a.inject({}) do |relations, relation|
+        type = relation.relation_type
+        targets = relation.n_targets.times.map{ |idx| Accessible.new(relation.target(idx)) }
+        relations.merge!(type => targets)
+      end
+    end
+  # @!endgroup
+
+  # @!group Actions
+    # @return [Array<Action>] the actions it supports. The array will be empty
+    #   if it does not implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-action action interface}
+    #
+    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-action atspi_accessible_get_action
+    def actions
+      if @native.action_iface
+        @native.n_actions.times.map{ |idx| Action.new(@native, idx) }
+      else
+        []
+      end
+    end
+  # @!endgroup
+
+  # @!group Representations
     # @return [Document, nil] its document. It will be nil if it does not
     #   implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-document document interface}
     #
@@ -247,12 +260,15 @@ module ATSPI
         Table.new(@native)
       end
     end
+  # @!endgroup
 
+  # @!group String Representations
     # @return [String] itself as an inspectable string
     def inspect
       "#<#{self.class.name}:0x#{'%x14' % __id__} @desktop=#{desktop.index} " <<
         "@application=#{application.name} @window=#{window.name} @path=#{path.join('/')} " <<
         "@name=#{name.inspect} @role=#{role.inspect} @extents=#{extents(relative_to: :screen).inspect}>"
     end
+  # @!endgroup
   end
 end
