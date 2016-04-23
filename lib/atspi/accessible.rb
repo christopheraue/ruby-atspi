@@ -90,32 +90,25 @@ module ATSPI
       if @native.collection_iface
         Descendants.new(@native)
       else
-        nil
+        []
       end
     end
-    alias_method :collection, :descendants
 
     def document
       if @native.document_iface
         Document.new(@native)
-      else
-        nil
       end
     end
 
     def text
       if @native.text_iface
         Text.new(@native)
-      else
-        nil
       end
     end
 
     def hyperlink
       if hyperlink = @native.hyperlink
         Hyperlink.new(hyperlink)
-      else
-        nil
       end
     end
     alias_method :link, :hyperlink
@@ -123,24 +116,18 @@ module ATSPI
     def image
       if @native.image_iface
         Image.new(@native)
-      else
-        nil
       end
     end
 
     def value
       if @native.value_iface
         Value.new(@native)
-      else
-        nil
       end
     end
 
     def table
       if @native.table_iface
         Table.new(@native)
-      else
-        nil
       end
     end
 
