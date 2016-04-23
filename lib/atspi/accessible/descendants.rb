@@ -15,8 +15,10 @@ module ATSPI
     end
 
     def where(filters)
-      extended_filters = filters.map{ |name, filter| [name, @filters[name].extend(filter)] }.to_h
-      dup(filters: @filters.merge(extended_filters))
+      dup(filters: @filters.map do |name, filter|
+        extended_filter = filters[name] ? filter.extend(filters[name]) : filter
+        [name, extended_filter]
+      end.to_h)
     end
 
     def invert(invert = true)
