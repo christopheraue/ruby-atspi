@@ -3,6 +3,11 @@ Libatspi.load_class :Accessible
 module ATSPI
   # ATSPI::Accessible wraps libatspi's AtspiAccessible[https://developer.gnome.org/libatspi/stable/AtspiAccessible.html]
   #
+  # The entry point to get ATSPI::Accessibles or one of it sub types are
+  # {ATSPI.desktops ATSPI.desktops} and {ATSPI.applications ATSPI.applications}.
+  # From there, accessibles are gotten via one of the Tree & Traversal methods
+  # like {#parent}, {#children} or {#descendants}.
+  #
   # Most methods correspond directly to the method in libatspi. Some have an
   # extended or beautified interface that is documented here.
   class Accessible
@@ -11,19 +16,7 @@ module ATSPI
     include Selectable
 
     class << self
-    # @!group Lifecycle
-      # Returns a new instance wrapping a native object coming from FFI. Does
-      # so by mapping desktop, application and window accessibles to their
-      # specific subclasses.
-      #
-      # @param native [Libatspi::Accessible]
-      #
-      # @return [Accessible, Desktop, Application, Window]
-      #
-      # @note
-      #   You should never need to call this directly. The main entry points
-      #   are {ATSPI.desktops} and {ATSPI.applications}. From there objects are
-      #   gotten via {#children} or {#descendants}
+    # @!visibility private
       def new(native)
         if self == Accessible
           native and (new_mapped(native) or super)
@@ -42,20 +35,20 @@ module ATSPI
         else nil
         end
       end
-    # @!endgroup
     end
 
-  # @!group Lifecycle
+  # @!visibility private
     def initialize(native)
       @native = native
     end
-  # @!endgroup
 
     attr_reader :native
     private :native
 
+  # @!visibility public
+
   # @!group Identification
-    # @return [Desktop] its desktop, that is the {#parent} of its {#application}.
+    # @return [Desktop] its desktop. That is the {#parent} of its {#application}.
     delegate :desktop => :application
 
     # @return [Application] its application
@@ -169,7 +162,10 @@ module ATSPI
       end
     end
 
-    # @return [Hash<Symbol => Array<Accessible>>] its relations as hash with relation type as key and relation targets as value.
+    # @return [Hash<Symbol => Array<Accessible>>] its relations to other
+    #   accessibles. Keys name the relation type and values are relation
+    #   targets.
+    #
     # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-relation-set atspi_accessible_get_relation_set
     # @see https://developer.gnome.org/libatspi/stable/AtspiRelation.html atspi-relation
     def relations
