@@ -1,5 +1,5 @@
-module ATSPI
-  module Accessible::Component
+class ATSPI::Accessible
+  module Extents
     def component?
       not @native.component_iface.nil?
     end
@@ -38,7 +38,7 @@ module ATSPI
 
     def accessible_at_point(x, y, relative_to:)
       if component?
-        Accessible.new(@native.accessible_at_point(x, y, relative_to))
+        ATSPI::Accessible.new(@native.accessible_at_point(x, y, relative_to))
       else
         nil
       end
@@ -46,9 +46,9 @@ module ATSPI
 
     def extents(relative_to:)
       if component?
-        Extents.new(@native.extents(relative_to))
+        ATSPI::Extents.new(@native.extents(relative_to))
       else
-        Extents.new(Struct.new(:x, :y, :width, :height).new(0, 0, 0, 0))
+        ATSPI::Extents.new(Struct.new(:x, :y, :width, :height).new(0, 0, 0, 0))
       end
     end
   end

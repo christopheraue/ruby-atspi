@@ -14,7 +14,7 @@ require 'atspi/selectable_collection/selected'
 
 # Accessible
 require 'atspi/accessible/selectable'
-require 'atspi/accessible/component'
+require 'atspi/accessible/extents'
 require 'atspi/accessible'
 
 # Action
