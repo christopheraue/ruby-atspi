@@ -202,11 +202,13 @@ module ATSPI
     # @return [Text, nil] its text. It will be nil if it does not
     #   implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-text text interface}
     #
-    # @note The {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-editable-text editable_text interface} is
+    # @note The {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-editable-text editable_text interface}
+    #   and {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-hypertext hypertext interface} are
     #   available through {Text}, too.
     #
-    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-text atspi_accessible_get_text
-    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-editable-text atspi_accessible_get_editable_text
+    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-text atspi_accessible_get_text_iface
+    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-editable-text atspi_accessible_get_editable_text_iface
+    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-hypertext atspi_accessible_get_hypertext_iface
     def text
       if @native.text_iface
         Text.new(@native)
