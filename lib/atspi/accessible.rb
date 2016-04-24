@@ -195,7 +195,7 @@ module ATSPI
     end
   # @!endgroup
 
-  # @!group Representations
+  # @!group Representative for
     # @return [Document, nil] its document. It will be nil if it does not
     #   implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-document document interface}
     #
@@ -262,7 +262,7 @@ module ATSPI
     end
   # @!endgroup
 
-  # @!group String Representations
+  # @!group Representations
     # @return [String] itself as an inspectable string
     def inspect
       "#<#{self.class.name}:0x#{'%x14' % __id__} @desktop=#{desktop.index} " <<
