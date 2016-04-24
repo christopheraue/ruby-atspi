@@ -76,7 +76,7 @@ module ATSPI
     alias_method :index, :index_in_parent
 
     # @return [Array<Integer>] the list of {#index_in_parent} of all its
-    #   ancestors until reaching its {#window}, inclusive.
+    #   ancestors until reaching its {#window}, exclusive.
     def path
       parent.path + [*index_in_parent]
     end
