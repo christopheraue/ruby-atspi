@@ -143,9 +143,6 @@ module ATSPI
     end
 
     # @return [Children] its children
-    #
-    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-child-count atspi_accessible_get_child_count
-    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-child-at-index atspi_accessible_get_child_at_index
     def children
       Children.new(@native)
     end
