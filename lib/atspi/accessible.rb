@@ -7,8 +7,8 @@ module ATSPI
   # extended or beautified interface that is documented here.
   class Accessible
     extend Forwardable
-    include Selectable
     include Component
+    include Selectable
 
     class << self
     # @!group Lifecycle
