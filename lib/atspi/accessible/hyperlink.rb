@@ -1,20 +1,28 @@
 class ATSPI::Accessible
   class Hyperlink
     extend Forwardable
-
-    def initialize(hyperlink_native)
-      @hyperlink_native = hyperlink_native
+    # @!visibility private
+    def initialize(native)
+      @native = native
     end
+    # @!visibility public
 
+    # @return [Array<Anchor>] its anchors
+    # @see https://developer.gnome.org/libatspi/stable/AtspiHyperlink.html#atspi-hyperlink-get-n-anchors atspi_hyperlink_get_n_anchors
     def anchors
-      @hyperlink_native.n_anchors.times.map do |idx|
-        Anchor.new(@hyperlink_native, idx)
+      @native.n_anchors.times.map do |idx|
+        Anchor.new(@native, idx)
       end
     end
 
-    delegate :is_valid => :@hyperlink_native
-    alias_method :valid?, :is_valid
+    # Checks if it's valid
+    # @return [true,false]
+    # @see https://developer.gnome.org/libatspi/stable/AtspiHyperlink.html#atspi-hyperlink-is-valid atspi_hyperlink_is_valid
+    def valid?
+      @native.is_valid
+    end
 
+    # @return [String] itself as an inspectable string
     def inspect
       "#<#{self.class.name}:0x#{'%x14' % __id__} @anchors=#{anchors.inspect}>"
     end
