@@ -1,12 +1,11 @@
 class ATSPI::Accessible
   # Wraps libatspi's AtspiAction[https://developer.gnome.org/libatspi/stable/libatspi-atspi-action.html]
   class Action
-  # @!visibility private
+    # @api private
     def initialize(native, idx)
       @native = native
       @idx = idx
     end
-  # @!visibility public
 
     # @return [String] its name
     #

@@ -4,13 +4,12 @@ module ATSPI
     class Selection < Range
       extend Forwardable
 
-      # @!visibility private
+      # @api private
       def initialize(text_native, idx)
         @text_native = text_native
         @idx = idx
         @range_native = @text_native.selection(idx)
       end
-      # @!visibility public
 
     # @!group Actions
       # Deselects itself.

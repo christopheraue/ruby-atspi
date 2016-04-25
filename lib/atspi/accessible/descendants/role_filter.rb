@@ -1,5 +1,6 @@
 module ATSPI
   class Accessible::Descendants
+    # @api private
     class RoleFilter
       def initialize(mode: :any, roles: [])
         @mode = mode

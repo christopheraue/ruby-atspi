@@ -3,11 +3,10 @@ module ATSPI
   class Accessible::Value
     extend Forwardable
 
-    # @!visibility private
+    # @api private
     def initialize(native)
       @native = native
     end
-    # @!visibility public
 
     # @return [Float] its minimum
     # @see https://developer.gnome.org/libatspi/stable/libatspi-atspi-value.html#atspi-value-get-minimum-value atspi_value_get_minimum_value

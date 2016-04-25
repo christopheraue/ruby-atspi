@@ -1,12 +1,11 @@
 class ATSPI::Accessible::Table
   # Represents a row in a {Table}
   class Row
-    # @!visibility private
+    # @api private
     def initialize(native, index)
       @native = native
       @index = index
     end
-    # @!visibility public
 
   # @group State & Attributes
     # @return [Integer] its index

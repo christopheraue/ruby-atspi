@@ -22,8 +22,7 @@ module ATSPI
   # In essence, it wraps libatspi's AtspiCollection[https://developer.gnome.org/libatspi/stable/libatspi-atspi-collection.html] and
   # AtspiMatchRule[https://developer.gnome.org/libatspi/stable/AtspiMatchRule.html]
   class Accessible::Descendants
-    # @!visibility private
-
+    # @api private
     def initialize(native)
       @native = native
       @filters = {
@@ -35,8 +34,6 @@ module ATSPI
       }
       @options = Options.new(nil, inverted?: false, order: :canonical, limit: 0, recursive?: true)
     end
-
-    # @!visibility public
 
   # @!group Filter
     # @note Filtering sometimes felt rocky on libatspi's side during testing.

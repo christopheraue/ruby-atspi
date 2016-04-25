@@ -1,11 +1,10 @@
 class ATSPI::Accessible
   # Wraps libatspi's AtspiDocument[https://developer.gnome.org/libatspi/stable/libatspi-atspi-document.html]
   class Document
-    # @!visibility private
+    # @api private
     def initialize(native)
       @native = native
     end
-    # @!visibility public
 
     # @return [String] its locale
     # @see https://developer.gnome.org/libatspi/stable/libatspi-atspi-document.html#atspi-document-get-locale atspi_document_get_locale

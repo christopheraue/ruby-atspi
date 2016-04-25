@@ -1,4 +1,5 @@
 class ATSPI::Accessible::Descendants
+  # @api private
   class Options
     def initialize(prototype = nil, extensions = {})
       @prototype = prototype

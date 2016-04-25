@@ -1,5 +1,6 @@
 module ATSPI
   class Accessible::Descendants
+    # @api private
     class StateFilter
       def initialize(mode: :all, states: [])
         @mode = mode

@@ -3,11 +3,10 @@ module ATSPI
   class Extents
     extend Forwardable
 
-    # @!visibility private
+    # @api private
     def initialize(native)
       @native = native
     end
-    # @!visibility public
 
     # @return [Integer] its x position
     delegate :x => :@native

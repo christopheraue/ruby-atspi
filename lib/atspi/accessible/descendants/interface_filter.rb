@@ -1,5 +1,6 @@
 module ATSPI
   class Accessible::Descendants
+    # @api private
     class InterfaceFilter
       def initialize(mode: :all, interfaces: [])
         @mode = mode

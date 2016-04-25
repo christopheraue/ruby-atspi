@@ -2,12 +2,11 @@ module ATSPI
   class Accessible::Text
     # Represents an offset in a {Text}.
     class Offset
-      # @!visibility private
+      # @api private
       def initialize(text_native, offset)
         @text_native = text_native
         @offset = offset
       end
-      # @!visibility public
 
     # @!group Attributes
       # @param boundary [Symbol] the boundary type derived from libatspi's

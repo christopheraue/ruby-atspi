@@ -4,12 +4,11 @@ module ATSPI
     class Range
       extend Forwardable
 
-      # @!visibility private
+      # @api private
       def initialize(text_native, range_native)
         @text_native = text_native
         @range_native = range_native
       end
-      # @!visibility public
 
     # @!group Attributes
       # @return [Offset] its start offset

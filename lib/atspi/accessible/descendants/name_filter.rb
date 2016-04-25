@@ -1,4 +1,5 @@
 class ATSPI::Accessible::Descendants
+  # @api private
   class NameFilter
     def initialize(match = nil)
       @match = match

@@ -7,11 +7,10 @@ class ATSPI::Accessible
     include Editable
     include Hypertext
 
-    # @!visibility private
+    # @api private
     def initialize(native)
       @native = native
     end
-    # @!visibility public
 
   # @!group Attributes & States
     # @return [Integer] its length

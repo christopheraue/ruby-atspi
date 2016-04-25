@@ -2,11 +2,10 @@ module ATSPI
   class Accessible::Text
     # Represents the caret in a {Text}.
     class Caret < Offset
-      # @!visibility private
+      # @api private
       def initialize(text_native)
         @text_native = text_native
       end
-      # @!visibility public
 
     # @!group Actions
       # @param offset [responds to #to_i]

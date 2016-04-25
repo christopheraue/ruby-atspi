@@ -2,12 +2,11 @@ class ATSPI::Accessible
   class Text
     # Represents a hyperlink in a {Text}.
     class Hyperlink < Hyperlink
-      # @!visibility private
+      # @api private
       def initialize(text_native, native)
         @text_native = text_native
         super(native)
       end
-      # @!visibility public
 
       # @return [Range] its range
       #

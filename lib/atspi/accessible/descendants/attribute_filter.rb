@@ -1,5 +1,6 @@
 module ATSPI
   class Accessible::Descendants
+    # @api private
     class AttributeFilter
       def initialize(mode: :any, attributes: {})
         @mode = mode

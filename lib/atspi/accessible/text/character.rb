@@ -2,12 +2,11 @@ module ATSPI
   class Accessible::Text
     # Represents a single character in a {Text}.
     class Character
-      # @!visibility private
+      # @api private
       def initialize(native, offset)
         @native = native
         @offset = offset
       end
-      # @!visibility public
 
     # @!group Attributes
       # @return [1] its length

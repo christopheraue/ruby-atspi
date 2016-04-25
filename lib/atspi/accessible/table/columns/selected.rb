@@ -4,14 +4,13 @@ module ATSPI
     class Columns::Selected
       include SelectableCollection::Selected
 
-      # @!visibility private
+      # @api private
       INDEX_METHOD = :index
 
-      # @!visibility private
+      # @api private
       def initialize(native)
         @native = native
       end
-      # @!visibility public
 
     # @!group Enumerable interface
       # Iterates over all selected columns

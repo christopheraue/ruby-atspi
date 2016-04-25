@@ -4,15 +4,14 @@ module ATSPI
     class Cell::Rows
       include SelectableCollection::Selected
 
-      # @!visibility private
+      # @api private
       INDEX_METHOD = :index
 
-      # @!visibility private
+      # @api private
       def initialize(native)
         @native = native
         @first_idx = row_col_span[1]
       end
-      # @!visibility public
 
     # @!group Enumerable interface
       # @param n [Integer] the index in the collection of the cell's rows and

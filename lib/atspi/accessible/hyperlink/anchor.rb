@@ -2,12 +2,11 @@ module ATSPI
   # Wraps libatspi's AtspiHyperlink[https://developer.gnome.org/libatspi/stable/AtspiHyperlink.html]
   # together with {Hyperlink}.
   class Accessible::Hyperlink::Anchor
-    # @!visibility private
+    # @api private
     def initialize(native, idx)
       @native = native
       @idx = idx
     end
-    # @!visibility public
 
     # @return [String] its uri
     # @see https://developer.gnome.org/libatspi/stable/AtspiHyperlink.html#atspi-hyperlink-get-uri atspi_hyperlink_get_uri

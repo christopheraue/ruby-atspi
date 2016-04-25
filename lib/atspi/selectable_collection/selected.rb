@@ -3,14 +3,13 @@ module ATSPI
   module SelectableCollection::Selected
     include Collection
 
-  # @!visibility private
+    # @api private
     INDEX_METHOD = :index_in_parent
 
     def indices(limit: count)
       [*first(limit)].map(&self.class::INDEX_METHOD)
     end
     private :indices
-  # @!visibility public
 
   # @!group Representation
     # @return [String] instance as inspectable string

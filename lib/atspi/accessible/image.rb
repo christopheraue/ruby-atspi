@@ -1,11 +1,10 @@
 module ATSPI
   # Wraps libatspi's AtspiImage[https://developer.gnome.org/libatspi/stable/libatspi-atspi-image.html]
   class Accessible::Image
-    # @!visibility private
+    # @api private
     def initialize(native)
       @native = native
     end
-    # @!visibility public
 
     # @return [String] its description
     # @see https://developer.gnome.org/libatspi/stable/libatspi-atspi-image.html#atspi-image-get-image-description atspi_image_get_image_description

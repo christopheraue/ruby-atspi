@@ -5,7 +5,7 @@ module ATSPI
   class StateSet
     extend Forwardable
 
-    # @!visibility private
+    # @api private
     def self.new_from_native(native)
       new(*native.states)
     end
@@ -23,10 +23,8 @@ module ATSPI
     end
   # @!endgroup
 
-    # @!visibility private
     attr_reader :native
     private :native
-    # @!visibility public
 
   # @!group Modification
     # Adds states to the set

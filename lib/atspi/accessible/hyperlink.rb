@@ -3,11 +3,10 @@ class ATSPI::Accessible
   # together with {Anchor}
   class Hyperlink
     extend Forwardable
-    # @!visibility private
+    # @api private
     def initialize(native)
       @native = native
     end
-    # @!visibility public
 
     # @return [Array<Anchor>] its anchors
     # @see https://developer.gnome.org/libatspi/stable/AtspiHyperlink.html#atspi-hyperlink-get-n-anchors atspi_hyperlink_get_n_anchors

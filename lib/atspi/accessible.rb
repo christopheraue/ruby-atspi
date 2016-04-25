@@ -16,7 +16,7 @@ module ATSPI
     include Selectable
 
     class << self
-    # @!visibility private
+      # @api private
       def new(native)
         if self == Accessible
           native and (new_mapped(native) or super)
@@ -37,15 +37,13 @@ module ATSPI
       end
     end
 
-  # @!visibility private
+    # @api private
     def initialize(native)
       @native = native
     end
 
     attr_reader :native
     private :native
-
-  # @!visibility public
 
   # @!group Identification
     # @return [Desktop] its desktop. That is the {#parent} of its {#application}.
