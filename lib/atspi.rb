@@ -55,6 +55,4 @@ module ATSPI
     #   @return [true, false]
     delegate %i(generate_keyboard_event generate_mouse_event) => :Libatspi
   end
-
-  class Error < StandardError; end
 end
