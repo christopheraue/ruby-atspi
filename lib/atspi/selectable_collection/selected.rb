@@ -1,4 +1,5 @@
 module ATSPI
+  # Included in classes representing the selected subset of a selectable collection
   module SelectableCollection::Selected
     include Collection
 

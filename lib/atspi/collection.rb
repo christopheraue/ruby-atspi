@@ -1,4 +1,5 @@
 module ATSPI
+  # Included in classes representing a collection that can be iterated over.
   # A Collection is an Enumerable adjusted to the what we can efficiently get
   # from libatspi. In particular, it provides access to items by index and
   # from the end of the collection.

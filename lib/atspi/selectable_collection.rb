@@ -1,18 +1,24 @@
 module ATSPI
+  # Included in classes representing a collection having selectable items
   module SelectableCollection
     include Collection
 
   # @!group Selection
+    # @return [Selected] its selected subset
     def selected
       self.class::Selected.new(@native)
     end
 
+    # Selects all items
+    # @return [true,false] indicating success
     def select_all
-      each(&:select)
+      map(&:select).all?
     end
 
+    # Deselects all items
+    # @return [true,false] indicating success
     def deselect_all
-      selected.each(&:deselect)
+      selected.map(&:deselect).all?
     end
   # @!endgroup
 
