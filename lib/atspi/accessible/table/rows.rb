@@ -1,21 +1,32 @@
 module ATSPI
   class Accessible::Table
+    # Represents all rows in a {Table}
     class Rows
       include SelectableCollection
 
+      # @!visibility private
       def initialize(native)
         @native = native
       end
+      # @!visibility public
 
-      def at(*)
-        super do |idx|
-          Row.new(@native, idx)
+    # @!group Enumerable interface
+      # @param idx [Integer]
+      #
+      # @return [Row] the row at index +idx+
+      def at(idx)
+        super do |mapped_idx|
+          Row.new(@native, mapped_idx)
         end
       end
 
+      # @return [Integer] its number of rows
+      #
+      # @see https://developer.gnome.org/libatspi/stable/libatspi-atspi-table.html#atspi-table-get-n-rows atspi_table_get_n_rows
       def count
         @native.n_rows
       end
+    # @!endgroup
     end
   end
 end
