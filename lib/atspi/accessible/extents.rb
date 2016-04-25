@@ -1,4 +1,5 @@
 class ATSPI::Accessible
+  # Wraps libatspi's AtspiComponent[https://developer.gnome.org/libatspi/stable/libatspi-atspi-component.html]
   module Extents
   # @!group Attributes & States
     # Checks if it is extending, that is it has a position and size.

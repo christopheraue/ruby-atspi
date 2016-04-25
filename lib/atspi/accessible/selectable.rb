@@ -1,4 +1,6 @@
 class ATSPI::Accessible
+  # Wraps libatspi's AtspiSelection[https://developer.gnome.org/libatspi/stable/libatspi-atspi-selection.html]
+  # together with parts of {Children} and {Children::Selected}
   module Selectable
   # @!group Attributes & States
     # Checks if it can be selected. Accessibles which parent's native

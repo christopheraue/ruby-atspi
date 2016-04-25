@@ -1,4 +1,5 @@
 module ATSPI
+  # Wraps libatspi's AtspiValue[https://developer.gnome.org/libatspi/stable/libatspi-atspi-value.html]
   class Accessible::Value
     extend Forwardable
 

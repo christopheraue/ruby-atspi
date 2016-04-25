@@ -18,6 +18,9 @@ module ATSPI
   #
   #   descendants.where(interface: :Action).map{ |d| d.actions.map(&:name) }
   #   # => [["click"], [], ["click"], [], …]
+  #
+  # In essence, it wraps libatspi's AtspiCollection[https://developer.gnome.org/libatspi/stable/libatspi-atspi-collection.html] and
+  # AtspiMatchRule[https://developer.gnome.org/libatspi/stable/AtspiMatchRule.html]
   class Accessible::Descendants
     # @!visibility private
 

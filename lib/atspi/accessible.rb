@@ -1,12 +1,12 @@
 Libatspi.load_class :Accessible
 
 module ATSPI
-  # ATSPI::Accessible wraps libatspi's AtspiAccessible[https://developer.gnome.org/libatspi/stable/AtspiAccessible.html]
+  # Wraps libatspi's AtspiAccessible[https://developer.gnome.org/libatspi/stable/AtspiAccessible.html]
   #
   # The entry point to get ATSPI::Accessibles or one of it sub types are
   # {ATSPI.desktops ATSPI.desktops} and {ATSPI.applications ATSPI.applications}.
-  # From there, accessibles are gotten via one of the Tree & Traversal methods
-  # like {#parent}, {#children} or {#descendants}.
+  # From there, accessibles are gotten via Tree & Traversal methods like
+  # {#parent}, {#children} or {#descendants}.
   #
   # Most methods correspond directly to the method in libatspi. Some have an
   # extended or beautified interface that is documented here.
@@ -176,9 +176,9 @@ module ATSPI
 
   # @!group Actions
     # @return [Array<Action>] the actions it supports. The array will be empty
-    #   if it does not implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-action action interface}
+    #   if it does not implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-action action interface}.
     #
-    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-action atspi_accessible_get_action
+    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-action atspi_accessible_get_action_iface
     def actions
       if @native.action_iface
         @native.n_actions.times.map{ |idx| Action.new(@native, idx) }
@@ -190,9 +190,9 @@ module ATSPI
 
   # @!group Representative for
     # @return [Document, nil] its document. It will be nil if it does not
-    #   implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-document document interface}
+    #   implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-document document interface}.
     #
-    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-document atspi_accessible_get_document
+    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-document atspi_accessible_get_document_iface
     def document
       if @native.document_iface
         Document.new(@native)
@@ -200,7 +200,7 @@ module ATSPI
     end
 
     # @return [Text, nil] its text. It will be nil if it does not
-    #   implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-text text interface}
+    #   implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-text text interface}.
     #
     # @note The {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-editable-text editable_text interface}
     #   and {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-hypertext hypertext interface} are
@@ -216,7 +216,7 @@ module ATSPI
     end
 
     # @return [Hyperlink, nil] its hyperlink. It will be nil if it does not
-    #   implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-hyperlink hyperlink interface}
+    #   have a {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-hyperlink hyperlink}.
     #
     # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-hyperlink atspi_accessible_get_hyperlink
     def hyperlink
@@ -227,9 +227,9 @@ module ATSPI
     alias_method :link, :hyperlink
 
     # @return [Image, nil] its image. It will be nil if it does not
-    #   implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-image image interface}
+    #   implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-image image interface}.
     #
-    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-image atspi_accessible_get_image
+    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-image atspi_accessible_get_image_iface
     def image
       if @native.image_iface
         Image.new(@native)
@@ -237,9 +237,9 @@ module ATSPI
     end
 
     # @return [Value, nil] its image. It will be nil if it does not
-    #   implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-value value interface}
+    #   implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-value value interface}.
     #
-    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-value atspi_accessible_get_value
+    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-value atspi_accessible_get_value_iface
     def value
       if @native.value_iface
         Value.new(@native)
@@ -247,9 +247,9 @@ module ATSPI
     end
 
     # @return [Table, nil] its table. It will be nil if it does not
-    #   implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-table table interface}
+    #   implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-table table interface}.
     #
-    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-table atspi_accessible_get_table
+    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-table atspi_accessible_get_table_iface
     def table
       if @native.table_iface
         Table.new(@native)

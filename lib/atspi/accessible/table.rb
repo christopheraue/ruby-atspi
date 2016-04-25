@@ -1,5 +1,5 @@
 module ATSPI
-  # Wraps libatspi's AtspiTable[https://developer.gnome.org/libatspi/stable/libatspi-atspi-table.html#AtspiTable].
+  # Wraps libatspi's AtspiTable[https://developer.gnome.org/libatspi/stable/libatspi-atspi-table.html].
   class Accessible::Table
     # @!visibility private
     def initialize(native)

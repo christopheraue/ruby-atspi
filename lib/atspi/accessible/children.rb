@@ -1,4 +1,6 @@
 module ATSPI
+  # Wraps the children part of libatspi's AtspiAccessible[https://developer.gnome.org/libatspi/stable/AtspiAccessible.html]
+  # and parts of AtspiSelection[https://developer.gnome.org/libatspi/stable/libatspi-atspi-selection.html].
   class Accessible::Children
     include SelectableCollection
 

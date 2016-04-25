@@ -1,4 +1,6 @@
 class ATSPI::Accessible
+  # Wraps libatspi's AtspiHyperlink[https://developer.gnome.org/libatspi/stable/AtspiHyperlink.html]
+  # together with {Anchor}
   class Hyperlink
     extend Forwardable
     # @!visibility private

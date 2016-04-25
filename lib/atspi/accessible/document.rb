@@ -1,4 +1,5 @@
 class ATSPI::Accessible
+  # Wraps libatspi's AtspiDocument[https://developer.gnome.org/libatspi/stable/libatspi-atspi-document.html]
   class Document
     # @!visibility private
     def initialize(native)

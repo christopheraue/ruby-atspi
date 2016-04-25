@@ -1,7 +1,7 @@
 class ATSPI::Accessible
-  # Wraps libatspi's {https://developer.gnome.org/libatspi/stable/libatspi-atspi-text.html#AtspiText text interface},
-  # {https://developer.gnome.org/libatspi/stable/libatspi-atspi-editabletext.html#AtspiEditableText editable_text interface} and
-  # {https://developer.gnome.org/libatspi/stable/libatspi-atspi-hypertext.html#AtspiHypertext hypertext interface}.
+  # Wraps libatspi's {https://developer.gnome.org/libatspi/stable/libatspi-atspi-text.html text interface},
+  # {https://developer.gnome.org/libatspi/stable/libatspi-atspi-editabletext.html editable_text interface} and
+  # {https://developer.gnome.org/libatspi/stable/libatspi-atspi-hypertext.html hypertext interface}.
   class Text
     extend Forwardable
     include Editable
