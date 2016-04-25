@@ -11,7 +11,7 @@ module ATSPI
       end
 
       def to_a
-        [StateSet.new_from_states(@states).__send__(:native), @mode]
+        [StateSet.new(*@states).__send__(:native), @mode]
       end
 
       def inspect

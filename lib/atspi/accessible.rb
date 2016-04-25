@@ -116,7 +116,7 @@ module ATSPI
     #
     # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-state-set atspi_accessible_get_state_set
     def states
-      StateSet.new(@native.state_set)
+      StateSet.new_from_native(@native.state_set)
     end
 
     # @return [Hash<String => String>] its attributes
