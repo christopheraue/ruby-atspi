@@ -7,7 +7,7 @@ module ATSPI
 
     # Returns all desktops known to AT-SPI.
     #
-    # @return [Array<ATSPI::Desktop>]
+    # @return [Array<Desktop>]
     #
     # @example
     #   ATSPI.desktops # => [#<ATSPI::Desktop:0xd4e81014 @index=0 @name="main">]
@@ -22,9 +22,9 @@ module ATSPI
 
     # Returns all applications for the given desktop.
     #
-    # @param desktop [ATSPI::Desktop]
+    # @param desktop [Desktop]
     #
-    # @return [Array<ATSPI::Application>]
+    # @return [Array<Application>]
     #
     # @example
     #   ATSPI.applications # => [#<ATSPI::Application:0x71d18014 @desktop=0 @name="gnome-terminal-server">, …]
