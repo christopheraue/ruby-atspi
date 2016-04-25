@@ -257,6 +257,7 @@ module ATSPI
   # @!endgroup
 
   # @!group Representations
+    # @return [String] itself as an inspectable string
     def inspect
       filter_inspect = @filters.map{ |n,f| "@#{n}=#{f.inspect}" }.join(' ')
       "#<#{self.class.name}:0x#{'%x14' % __id__} #{filter_inspect} #{@options.inspect}>"
