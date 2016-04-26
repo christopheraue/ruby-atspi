@@ -53,7 +53,7 @@ selected_tab.index # => 2
 
 ## Documentation
 
-Detailed documentation can be found at [http://www.rubydoc.info/gems/atspi](http://www.rubydoc.info/gems/atspi).
+Detailed documentation can be found at [http://www.rubydoc.info/gems/atspi](http://www.rubydoc.info/gems/atspi/).
 
 Especially:
 
