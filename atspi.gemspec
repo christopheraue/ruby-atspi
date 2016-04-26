@@ -9,7 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Christopher Aue"]
   spec.email         = ["mail@christopheraue.net"]
 
-  spec.summary       = %q{A wrapper around libatspi}
+  spec.summary       = %q{The atspi gem lets you comfortably call the Assistive Technology Service Provider Interface on Linux.}
+  spec.description   = %q{It is a high level wrapper around libatspi.}
   spec.homepage      = "https://github.com/christopheraue/ruby-atspi"
   spec.license       = "MIT"
 
@@ -19,5 +20,4 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "gir_ffi", "~> 0.10.0"
   spec.add_development_dependency "bundler", "~> 1.8"
-  spec.add_development_dependency "rake", "~> 10.0"
 end
