@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Christopher Aue"]
   spec.email         = ["mail@christopheraue.net"]
 
-  spec.summary       = %q{The atspi gem lets you comfortably call the Assistive Technology Service Provider Interface on Linux.}
-  spec.description   = %q{It is a high level wrapper around libatspi.}
+  spec.description   = %q{The atspi gem lets you comfortably call the Assistive Technology Service Provider Interface (AT-SPI) on Linux.}
+  spec.summary       = %q{A high level wrapper around libatspi.}
   spec.homepage      = "https://github.com/christopheraue/ruby-atspi"
   spec.license       = "MIT"
 
