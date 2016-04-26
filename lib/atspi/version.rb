@@ -1,4 +1,4 @@
 module ATSPI
   # this library's version
-  VERSION = "0.1.0"
+  VERSION = "0.8.1"
 end
