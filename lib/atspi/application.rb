@@ -34,6 +34,13 @@ module ATSPI
     def windows
       children
     end
+
+    # It cannot get descendants by path since the path begins not until
+    # reaching the children of windows.
+    # @return [nil]
+    def descendant_by_path(*path)
+      nil
+    end
   # @!endgroup
 
   # @!group Representations

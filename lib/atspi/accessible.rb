@@ -157,6 +157,30 @@ module ATSPI
       end
     end
 
+    # @return [Accessible] its descendant found at the given path
+    #
+    # @overload descendant_by_path(path)
+    #   @param path [Array] a path as returned by {#path}
+    #
+    #   @example
+    #     descendant        # => #<ATSPI::Accessible:0xc1f18814 … @path=0/0/2/1 … >
+    #     descendant.path   # => [0, 0, 2, 1]
+    #     accessible.descendant_by_path(descendant.path) # => #<ATSPI::Accessible:0xc1f18814 … @path=0/0/2/1 … >
+    #
+    # @overload descendant_by_path(child_idx, grand_child_idx, *further_indices)
+    #   @param child_idx [Integer] the child's {#index_in_parent}
+    #   @param grand_child_idx [Integer] the grand child's {#index_in_parent}
+    #   @param further_indices [Integer] additional {#index_in_parent}s of further descendants
+    #
+    #   @example
+    #     accessible.descendant_by_path(0, 0, 2, 1) # => #<ATSPI::Accessible:0xc1f18814 … @path=0/0/2/1 … >
+    def descendant_by_path(*path)
+      path = path.flatten
+      child = children[path.shift]
+      found = child.nil? || path.empty?
+      found ? child : child.descendant_by_path(path)
+    end
+
     # @return [Hash<Symbol => Array<Accessible>>] its relations to other
     #   accessibles. Keys name the relation type and values are relation
     #   targets.
