@@ -23,7 +23,7 @@ class ATSPI::Accessible
       end
 
       # @param row [Integer]
-      # @param colum [Integer]
+      # @param column [Integer]
       #
       # @return [Cell] the cell at (+row+,+column+)
       #
