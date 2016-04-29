@@ -157,7 +157,7 @@ module ATSPI
       end
     end
 
-    # @return [Accessible] its descendant found at the given path
+    # @return [Accessible,nil] its descendant found at the given path
     #
     # @overload descendant_by_path(path)
     #   @param path [Array] a path as returned by {#path}
@@ -258,7 +258,7 @@ module ATSPI
       end
     end
 
-    # @return [Value, nil] its image. It will be nil if it does not
+    # @return [Value, nil] its value. It will be nil if it does not
     #   implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-value value interface}.
     #
     # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-value atspi_accessible_get_value_iface
