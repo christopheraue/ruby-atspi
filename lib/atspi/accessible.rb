@@ -34,6 +34,8 @@ module ATSPI
         when :frame then Window.new(native)
         else nil
         end
+      rescue
+        ErrorAccessible.new(native)
       end
     end
 
