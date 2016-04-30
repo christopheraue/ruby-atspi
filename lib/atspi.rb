@@ -1,9 +1,18 @@
 require 'atspi/requires'
+require 'dbus'
 
 # ATSPI is the entry point to access accessible objects.
 module ATSPI
   class << self
     extend Forwardable
+
+    # Checks if AT-SPI is activated on the system
+    #
+    # @return [true,false]
+    def available?
+      session_bus = DBus::SessionBus.instance
+      session_bus.service('org.a11y.Bus').exists?
+    end
 
     # Returns all desktops known to AT-SPI.
     #
@@ -15,8 +24,12 @@ module ATSPI
     # @see https://developer.gnome.org/libatspi/stable/libatspi-atspi-registry.html#atspi-get-desktop atspi_get_desktop
     # @see https://developer.gnome.org/libatspi/stable/libatspi-atspi-registry.html#atspi-get-desktop-count atspi_get_desktop_count
     def desktops
-      @desktops ||= Libatspi.get_desktop_count.times.map do |idx|
-        Desktop.new(Libatspi.get_desktop(idx))
+      @desktops ||= if available?
+        Libatspi.get_desktop_count.times.map do |idx|
+          Desktop.new(Libatspi.get_desktop(idx))
+        end
+      else
+        []
       end
     end
 
@@ -29,7 +42,11 @@ module ATSPI
     # @example
     #   ATSPI.applications # => [#<ATSPI::Application:0x71d18014 @desktop=0 @name="gnome-terminal-server">, …]
     def applications(desktop = desktops.first)
-      desktop.applications
+      if desktop
+        desktop.applications
+      else
+        []
+      end
     end
 
     #@!method generate_keyboard_event(keyval, keystring, synth_type)
