@@ -149,7 +149,7 @@ module ATSPI
       Children.new(@native)
     end
 
-    # @return [Descendants, []] its descendants. It will be an empty array it
+    # @return [Descendants, []] its descendants. It will be an empty array if it
     #   does not implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-collection collection interface}
     #
     # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-collection atspi_accessible_get_collection
