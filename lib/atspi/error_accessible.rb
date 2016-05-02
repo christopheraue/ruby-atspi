@@ -85,9 +85,9 @@ module ATSPI
       ''
     end
 
-    # @return [StateSet] an empty state set
+    # @return [[]] no states
     def states
-      StateSet.new
+      []
     end
 
     # @return [{}] an empty hash

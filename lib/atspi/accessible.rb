@@ -112,11 +112,13 @@ module ATSPI
     # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-toolkit-version atspi_accessible_get_toolkit_version
     delegate :toolkit_version => :@native
 
-    # @return [StateSet] its states
+    # @return [Array<Symbol>] its states. They are symbols derived from libatspi's
+    #   {AtspiStateType enum}[https://developer.gnome.org/libatspi/stable/libatspi-atspi-constants.html#AtspiStateType]
+    #   by removing the prefix +ATSPI_STATE_+ and making them lowercase.
     #
     # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-state-set atspi_accessible_get_state_set
     def states
-      StateSet.new_from_native(@native.state_set)
+      StateSet.new_from_native(@native.state_set).to_a
     end
 
     # @return [Hash<String => String>] its attributes
