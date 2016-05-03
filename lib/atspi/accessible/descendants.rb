@@ -256,6 +256,27 @@ module ATSPI
     end
   # @!endgroup
 
+  # @!group Selection
+    # @return [Array<Accessible>] its selected subset.
+    def selected
+      select(&:selected?)
+    end
+
+    # Tries to select all descendants in the collection
+    #
+    # @return [true,false] indicates if *all* are now selected
+    def select_all
+      map(&:select).all?
+    end
+
+    # Tries to deselect all descendants in the collection
+    #
+    # @return [true,false] indicates if *all* are now deselected
+    def deselect_all
+      map(&:deselect).all?
+    end
+  # @!endgroup
+
   # @!group Representations
     # @return [String] itself as an inspectable string
     def inspect
