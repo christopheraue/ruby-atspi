@@ -240,8 +240,10 @@ module ATSPI
 
   # @!group Access
     # @return [Array<Accessible>] the descendants according to the configured
-    #   filters and options.
+    #   filters and options. The collection will be empty if the accessible
+    #   does not implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-collection collection interface}
     def to_a
+      return [] unless @native.collection_iface
       match_rule = Libatspi::MatchRule.new(*@filters[:state], *@filters[:attributes],
         *@filters[:role], *@filters[:interface], @options.inverted?)
       matches = @native.matches(match_rule, *@options).to_a

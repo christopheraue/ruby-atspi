@@ -149,16 +149,12 @@ module ATSPI
       Children.new(@native)
     end
 
-    # @return [Descendants, []] its descendants. It will be an empty array if it
+    # @return [Descendants] its descendants. The collection will be empty if it
     #   does not implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-collection collection interface}
     #
     # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-collection atspi_accessible_get_collection
     def descendants
-      if @native.collection_iface
-        Descendants.new(@native)
-      else
-        []
-      end
+      Descendants.new(@native)
     end
 
     # @return [Accessible,nil] its descendant found at the given path
