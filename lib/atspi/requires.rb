@@ -22,6 +22,7 @@ require 'atspi/accessible/action'
 
 # Children
 require 'atspi/accessible/children'
+require 'atspi/accessible/children/selected'
 
 # Descendants
 require 'atspi/accessible/descendants'

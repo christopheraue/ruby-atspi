@@ -28,5 +28,45 @@ module ATSPI
       @native.child_count
     end
   # @!endgroup
+
+  # @!group Selection
+    # Checks if the accessible the children belong to implements the selection
+    # interface.
+    #
+    # @return [true,false]
+    #
+    # @see https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-selection atspi_accessible_get_selection
+    def selectable?
+      not @native.selection_iface.nil?
+    end
+
+    # @return [Selected,[]] its selected subset. It will be an empty array if
+    #   children are not selectable.
+    def selected
+      if selectable?
+        Selected.new(@native)
+      else
+        []
+      end
+    end
+
+    # Tries to select all children
+    #
+    # @return [true,false] indicates success
+    #
+    # @see https://developer.gnome.org/libatspi/stable/libatspi-atspi-selection.html#atspi-selection-select-all atspi_selection_select_all
+    def select_all
+      selectable? and @native.select_all
+    end
+
+    # Tries to deselect all children
+    #
+    # @return [true,false] indicates success
+    #
+    # @see https://developer.gnome.org/libatspi/stable/libatspi-atspi-selection.html#atspi-selection-clear-selection atspi_selection_clear_selection
+    def deselect_all
+      selectable? and @native.clear_selection
+    end
+  # @!endgroup
   end
 end

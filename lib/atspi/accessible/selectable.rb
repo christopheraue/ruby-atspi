@@ -1,6 +1,6 @@
 class ATSPI::Accessible
   # Wraps libatspi's AtspiSelection[https://developer.gnome.org/libatspi/stable/libatspi-atspi-selection.html]
-  # together with parts of {Children}
+  # together with parts of {Children} and {Children::Selected}
   module Selectable
   # @!group Attributes & States
     # Checks if it can be selected. Accessibles which parent's native
@@ -9,7 +9,7 @@ class ATSPI::Accessible
     #
     # @return [true, false]
     def selectable?
-      not parent.__send__(:native).selection_iface.nil?
+      parent.children.selectable?
     end
   # @!endgroup
 
@@ -24,12 +24,12 @@ class ATSPI::Accessible
     end
 
     # Deselects it
-    # @return [true, false] indicating success of the operation. +true+ if its
+    # @return [true, false] indicating success of the operation. +false+ if its
     #   parent does not implement the {https://developer.gnome.org/libatspi/stable/AtspiAccessible.html#atspi-accessible-get-selection selection interface}.
     #
     # @see https://developer.gnome.org/libatspi/stable/libatspi-atspi-selection.html#atspi-selection-deselect-child atspi_selection_deselect_child
     def deselect
-      not selectable? or parent.__send__(:native).deselect_child(index_in_parent)
+      selectable? and parent.__send__(:native).deselect_child(index_in_parent)
     end
   # @!endgroup
 
