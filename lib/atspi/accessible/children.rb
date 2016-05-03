@@ -68,5 +68,47 @@ module ATSPI
       selectable? and @native.clear_selection
     end
   # @!endgroup
+
+  # @!group Filter
+    # @note (see Descendants#where)
+    # @see (see Descendants#where)
+    # @return [Descendants] the children collection as filtered descendants
+    #   collection.
+    # @overload (see Descendants#where)
+    def where(*args)
+      Accessible::Descendants.new(@native).recursive(false).where(*args)
+    end
+  # @!endgroup
+
+  # @!group Options
+    # @param (see Descendants#sort_by)
+    # @return [Descendants] the children collection as sorted descendants
+    #   collection.
+    # @example (see Descendants#sort_by)
+    # @see (see Descendants#sort_by)
+    def sort_by(order)
+      Accessible::Descendants.new(@native).recursive(false).sort_by(order)
+    end
+
+    # @param (see Descendants#limit_to)
+    # @return [Descendants] the children collection as limited descendants
+    #   collection.
+    # @see (see Descendants#limit_to)
+    def limit_to(limit)
+      Accessible::Descendants.new(@native).recursive(false).limit_to(limit)
+    end
+
+    # @param (see Descendants#recursive)
+    # @return [Descendants,self] self if +recursive+ is set to +false+. A
+    #   collection of all descendants if +recursive+ is set to +true+
+    # @see (see Descendants#recursive)
+    def recursive(recursive = true)
+      if recursive
+        Accessible::Descendants.new(@native)
+      else
+        self
+      end
+    end
+  # @!endgroup
   end
 end
