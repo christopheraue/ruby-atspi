@@ -22,6 +22,14 @@ module ATSPI
   # In essence, it wraps libatspi's AtspiCollection[https://developer.gnome.org/libatspi/stable/libatspi-atspi-collection.html] and
   # AtspiMatchRule[https://developer.gnome.org/libatspi/stable/AtspiMatchRule.html]
   class Accessible::Descendants
+    extend Forwardable
+    # Delegate all methods of arrays directly to the array representation so
+    # methods available otherwise (like #select through Kernel) do not
+    # interfere
+    Array.instance_methods(false).each do |method|
+      delegate method => :to_a
+    end
+
     # @api private
     def initialize(native)
       @native = native
