@@ -1,6 +1,9 @@
 module ATSPI
   class Accessible::Table
-    # Represents all columns in a {Table}
+    # Represents all columns in a {Table}.
+    #
+    # Instance are enumerables supporting item access and can be treated more or
+    # less like an array.
     class Columns
       include SelectableCollection
 

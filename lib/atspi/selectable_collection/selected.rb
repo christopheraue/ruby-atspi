@@ -1,5 +1,9 @@
 module ATSPI
-  # Included in classes representing the selected subset of a selectable collection
+  # Included in classes representing the selected subset of a selectable
+  # collection.
+  #
+  # Instance are enumerables supporting item access and can be treated more or
+  # less like an array.
   module SelectableCollection::Selected
     include Collection
 

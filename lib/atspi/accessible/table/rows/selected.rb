@@ -1,6 +1,9 @@
 module ATSPI
   class Accessible::Table
-    # Represents all selected rows of a {Table}
+    # Represents all selected rows of a {Table}.
+    #
+    # Instance are enumerables supporting item access and can be treated more or
+    # less like an array.
     class Rows::Selected
       include SelectableCollection::Selected
 

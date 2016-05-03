@@ -1,6 +1,9 @@
 module ATSPI
   # Wraps libatspi's AtspiSelection[https://developer.gnome.org/libatspi/stable/libatspi-atspi-selection.html]
   # together with parts of {Selectable} and {Children}
+  #
+  # Instance are enumerables supporting item access and can be treated more or
+  # less like an array.
   class Accessible::Children::Selected
     include SelectableCollection::Selected
 
