@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "atspi"
   spec.version       = ATSPI::VERSION
   spec.authors       = ["Christopher Aue"]
-  spec.email         = ["mail@christopheraue.net"]
+  spec.email         = ["rubygems@christopheraue.net"]
 
   spec.description   = %q{The atspi gem lets you comfortably call the Assistive Technology Service Provider Interface (AT-SPI) on Linux.}
   spec.summary       = %q{A high level wrapper around libatspi.}
